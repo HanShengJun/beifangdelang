@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrap {
+            width: 300px;
+            margin: 100px auto 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            width: 300px;
+        }
+
+        th,
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+        }
+
+        td {
+            font: 14px "微软雅黑";
+        }
+
+        tbody tr {
+            background-color: #f0f0f0;
+        }
+
+        tbody tr:hover {
+            cursor: pointer;
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <table>
+        <thead>
+        <tr>
+            <th>
+                <input type="checkbox" id="j_cbAll" />
+            </th>
+            <th>菜名</th>
+            <th>饭店</th>
+        </tr>
+        </thead>
+        <tbody id="j_tb">
+        <tr>
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td>红烧肉</td>
+            <td>田老师</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td>西红柿鸡蛋</td>
+            <td>田老师</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td>红烧狮子头</td>
+            <td>田老师</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td>日式肥牛</td>
+            <td>田老师</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<script>
+    //目标：全选反选
+
+    //1 点击全选按钮，如果全选选中，让子的checkbox选中
+    //1.1 获取全选按钮
+    var all = document.getElementById("j_cbAll");
+    //1.2 注册事件
+    all.onclick = function () {
+        //获取所有的子的checkbox
+        var tbody = document.getElementById("j_tb");
+        var checkboxs = tbody.getElementsByTagName("input");
+        for(var i = 0; i < checkboxs.length; i++) {
+            var checkbox = checkboxs[i];
+            //让子的checkbox的选中状态和全选的选中状态一致
+            checkbox.checked = this.checked;
+        }
+    };
+    var tbody = document.getElementById("j_tb");
+    var checkboxs = tbody.getElementsByTagName("input");
+    // for (var i = 0; i < checkboxs.length; i++) {
+    //     var checkbox = checkboxs[i];
+    //     checkbox.onclick = function(){
+    //         var m = true;
+    //         for (var b = 0; b < checkboxs.length; b++) {
+    //             var box = checkboxs[b];
+    //             if (box.checked != this.checked) {
+    //                 m = false;
+    //                 break;
+    //             }
+    //         }
+    //         if (m==true) {
+    //             all.checked = this.checked;
+    //         }
+    //         else{
+    //             all.checked = false;
+    //         }
+            
+    //     }
+    // }
+    for (var i = 0; i < checkboxs.length; i++) {
+        var checkbox = checkboxs[i];
+        checkbox.onclick = function(){
+            var m = 0;
+            for (var b = 0; b < checkboxs.length; b++) {
+                var box = checkboxs[b];
+                if (box.checked == this.checked) {
+                    m = m+1;
+                }
+            }
+            if (m==4) {
+                all.checked = this.checked;
+            }
+            else{
+                all.checked = false;
+            }
+            
+        }
+    }
+
+    //2 点击子的checkbox
+    //如果子的checkbox都选中，让全选选中
+    //如果子的checkbox有一个没有选中，让全选不选中
+
+</script>
+</body>
+</html>
